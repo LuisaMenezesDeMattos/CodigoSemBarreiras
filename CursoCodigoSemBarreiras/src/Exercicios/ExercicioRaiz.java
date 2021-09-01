@@ -61,7 +61,7 @@ public class ExercicioRaiz {
     public static Boolean repetir(){
         escreverLinha("\nDeseja rodar o programa novamente? [s] ou [n]");
         char opcao = lerChar();
-        opcao =
+        return true;
     }
 
 
