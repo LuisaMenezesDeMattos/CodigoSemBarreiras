@@ -14,6 +14,7 @@ public class Base {
 
     public static String lerString(){
         try{
+            System.out.print("> ");
             return new Scanner(System.in).nextLine();
         }catch(Exception e){
             escreverMsgErro(e.getMessage());
@@ -22,6 +23,7 @@ public class Base {
     }
     public static Integer lerInteger(){
         try{
+            System.out.print("> ");
             return new Scanner(System.in).nextInt();
         }catch(Exception e){
             escreverMsgErro(e.getMessage());
@@ -30,6 +32,7 @@ public class Base {
     }
     public static Double lerDouble(){
         try{
+            System.out.print("> ");
             return new Scanner(System.in).nextDouble();
         }catch(Exception e){
             escreverMsgErro(e.getMessage());
@@ -54,8 +57,10 @@ public class Base {
         escreverLinha("\nDeseja repetir o código? Enter para sim, 0 para não");
         String opcao = lerString();
         if(opcao.equals("")){
+            escreverLinha("");
             return true;
         }
+        escreverTitulo("Programa finalizado");
        return false;
     }
 
