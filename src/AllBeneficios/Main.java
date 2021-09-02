@@ -14,9 +14,15 @@
 
 package AllBeneficios;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Main {
+
+    /** Escreve um valor em reais */
+    static String escreverEmReais(double valor){
+        return new DecimalFormat("'R$'.00").format(valor);
+    }
 
     /** Lê um valor em reais */
     static double lerDinheiro(String identacao){
@@ -24,7 +30,7 @@ public class Main {
         boolean entradaInvalida = true;
         do{
             try{
-                System.out.print(identacao + "> ");
+                System.out.print(identacao + "> R$ ");
                 dinheiro = new Scanner(System.in).nextDouble();
                 entradaInvalida = false;
             }catch (Exception e){
@@ -66,7 +72,7 @@ public class Main {
         }
         saldo = saldo - pagamento;
         System.out.println(identacao + "Pagamento efetuado com sucesso!");
-        System.out.println(identacao + "Saldo novo: R$" + saldo);
+        System.out.println(identacao + "Saldo novo: " + escreverEmReais(saldo));
         return saldo;
     }
 
@@ -74,13 +80,14 @@ public class Main {
     public static void main(String[] args) {
 
         //Informar os saldos
-        System.out.println("\nBEM-VINDO(A)");
+        System.out.println("\nGERENCIADOR DE CARTÕES ALL BENEFÍCIOS");
+        System.out.println("Bem vindo(a)!");
         System.out.println("Antes de iniciar o programa, favor informar os saldos iniciais");
-        System.out.println("Saldo do cartão de alimentação:");
+        System.out.println("Saldo do Vale-Alimentação All Benefícios TM:");
         double saldoAlimentacao = lerDinheiro("");
-        System.out.println("Saldo do cartão de refeição:");
+        System.out.println("Saldo do Vale-Refeição All Benefícios TM:");
         double saldoRefeicao = lerDinheiro("");
-        System.out.println("Saldo do cartão de transporte:");
+        System.out.println("Saldo do Vale-Transporte All Benefícios TM:");
         double saldoTransporte = lerDinheiro("");
 
         //Operações do usuário
@@ -99,24 +106,22 @@ public class Main {
             }
             if (operacao == 1) {
                 //Operacao 1: Printar os saldos na tela
-                System.out.println(" |");
                 System.out.println(" | VISUALIZAÇÃO DE SALDOS");
-                System.out.println(" |  | Saldo de Alimentação: R$" + saldoAlimentacao);
-                System.out.println(" |  | Saldo de Refeição: R$" + saldoRefeicao);
-                System.out.println(" |  | Saldo de Transporte: R$" + saldoTransporte);
+                System.out.println(" |  | Saldo de Alimentação: " + escreverEmReais(saldoAlimentacao));
+                System.out.println(" |  | Saldo de Refeição: " + escreverEmReais(saldoRefeicao));
+                System.out.println(" |  | Saldo de Transporte: " + escreverEmReais(saldoTransporte));
                 System.out.println(" | -----------------------------------------");
             }
             else if (operacao == 2){
                 //Opcao 2: Efetuar pagamento
-                System.out.println(" |");
                 System.out.println(" | PAGAMENTO");
-                System.out.println(" | Com qual cartão deseja efetuar o pagamento?");
+                System.out.println(" | Com qual cartão deseja utilizar?");
                 System.out.println(" |  | 1 - Alimentação ");
                 System.out.println(" |  | 2 - Refeição ");
                 System.out.println(" |  | 3 - Transporte");
                 int cartao = lerOpcao(" |  | ");
                 while(cartao != 1 && cartao != 2 && cartao != 3){
-                    System.out.println(" |  | Escolha uma das opções dadas!");
+                    System.out.println(" |  | ERRO: Digite um número válido");
                     cartao = lerOpcao(" |  | ");
                 }
                 switch (cartao) {
@@ -142,7 +147,9 @@ public class Main {
 
         }while (repetir) ;
 
+        System.out.println("\nA All Benefícios agradece a preferência");
         System.out.println("--- PROGRAMA FINALIZADO ---");
+
 
     }
 }
