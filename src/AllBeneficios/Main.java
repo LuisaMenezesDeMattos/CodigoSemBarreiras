@@ -18,38 +18,38 @@ import java.util.Scanner;
 
 public class Main {
 
-    /** Lê um valor de reais */
-    static double lerDinheiro(){
+    /** Lê um valor em reais */
+    static double lerDinheiro(String identacao){
         double dinheiro = -1;
         boolean entradaInvalida = true;
         do{
             try{
-                System.out.print("> ");
+                System.out.print(identacao + "> ");
                 dinheiro = new Scanner(System.in).nextDouble();
                 entradaInvalida = false;
             }catch (Exception e){
-                System.out.println("ERRO: Digite um número válido");
+                System.out.println(identacao + "ERRO: Digite um número válido");
                 entradaInvalida = true;
             }
-            if(dinheiro < 0){
-                System.out.println("ERRO: Não é possível usar valores negativos");
+            if(!entradaInvalida && dinheiro < 0){
+                System.out.println(identacao + "ERRO: Não é possível usar valores negativos");
                 entradaInvalida = true;
             }
         }while(entradaInvalida);
         return dinheiro;
     }
 
-    /** Lê a opcao do usuário */
-    static int lerOpcao(){
+    /** Lê a opção do usuário */
+    static int lerOpcao(String identacao){
         int opcao = 0;
         boolean entradaInvalida = true;
         do{
             try{
-                System.out.print("> ");
+                System.out.print(identacao + "> ");
                 opcao = new Scanner(System.in).nextInt();
                 entradaInvalida = false;
             }catch (Exception e){
-                System.out.println("ERRO: Digite um número válido");
+                System.out.println(identacao + "ERRO: Digite um número válido");
                 entradaInvalida = true;
             }
         }while(entradaInvalida);
@@ -57,15 +57,16 @@ public class Main {
     }
 
     /** Recebe um dado saldo e tenta efetuar um pagamento sobre aquele saldo */
-    public static double efetuarPagamento(double saldo){
-        System.out.println("Informe o valor do pagamento:");
-        double pagamento = lerDinheiro();
+    public static double efetuarPagamento(double saldo, String identacao){
+        System.out.println(identacao + "Informe o valor do pagamento:");
+        double pagamento = lerDinheiro(identacao);
         if(pagamento > saldo){
-            System.out.println("Saldo indisponível!");
+            System.out.println(identacao + "Saldo indisponível!");
             return saldo;
         }
         saldo = saldo - pagamento;
-        System.out.println("Saldo novo: R$" + saldo);
+        System.out.println(identacao + "Pagamento efetuado com sucesso!");
+        System.out.println(identacao + "Saldo novo: R$" + saldo);
         return saldo;
     }
 
@@ -76,64 +77,70 @@ public class Main {
         System.out.println("\nBEM-VINDO(A)");
         System.out.println("Antes de iniciar o programa, favor informar os saldos iniciais");
         System.out.println("Saldo do cartão de alimentação:");
-        double saldoAlimentacao = lerDinheiro();
+        double saldoAlimentacao = lerDinheiro("");
         System.out.println("Saldo do cartão de refeição:");
-        double saldoRefeicao = lerDinheiro();
+        double saldoRefeicao = lerDinheiro("");
         System.out.println("Saldo do cartão de transporte:");
-        double saldoTransporte = lerDinheiro();
+        double saldoTransporte = lerDinheiro("");
 
         //Operações do usuário
-        int finalizar;
+        boolean repetir = true;
+        System.out.println("\n");
         do {
-            System.out.println("\nEscolha a operação:");
-            System.out.println(" 1 - Visualizar saldos");
-            System.out.println(" 2 - Efetuar um pagamento");
-            int operacao = lerOpcao();
-            while (operacao != 1 && operacao != 2) {
-                System.out.println("Escolha uma das opções dadas!");
-                operacao = lerOpcao();
+            System.out.println("-----------------------------------------");
+            System.out.println("Escolha a operação que deseja realizar:");
+            System.out.println(" | 1 - Visualizar saldos");
+            System.out.println(" | 2 - Efetuar um pagamento");
+            System.out.println(" | 3 - Fechar o programa");
+            int operacao = lerOpcao(" | ");
+            while (operacao != 1 && operacao != 2 && operacao != 3) {
+                System.out.println(" | ERRO: Digite um número válido");
+                operacao = lerOpcao(" | ");
             }
             if (operacao == 1) {
                 //Operacao 1: Printar os saldos na tela
-                System.out.println("\nVISUALIAÇÃO DE SALDOS");
-                System.out.println("Saldo de Alimentação: R$" + saldoAlimentacao);
-                System.out.println("Saldo de Refeição: R$" + saldoRefeicao);
-                System.out.println("Saldo de Transporte: R$" + saldoTransporte);
-            } else {
+                System.out.println(" |");
+                System.out.println(" | VISUALIZAÇÃO DE SALDOS");
+                System.out.println(" |  | Saldo de Alimentação: R$" + saldoAlimentacao);
+                System.out.println(" |  | Saldo de Refeição: R$" + saldoRefeicao);
+                System.out.println(" |  | Saldo de Transporte: R$" + saldoTransporte);
+                System.out.println(" | -----------------------------------------");
+            }
+            else if (operacao == 2){
                 //Opcao 2: Efetuar pagamento
-                System.out.println("\nPAGAMENTO");
-                System.out.println("Com qual cartão deseja efetuar o pagamento?");
-                System.out.println(" 1 - Alimentação ");
-                System.out.println(" 2 - Refeição ");
-                System.out.println(" 3 - Transporte");
-                int cartao = lerOpcao();
+                System.out.println(" |");
+                System.out.println(" | PAGAMENTO");
+                System.out.println(" | Com qual cartão deseja efetuar o pagamento?");
+                System.out.println(" |  | 1 - Alimentação ");
+                System.out.println(" |  | 2 - Refeição ");
+                System.out.println(" |  | 3 - Transporte");
+                int cartao = lerOpcao(" |  | ");
                 while(cartao != 1 && cartao != 2 && cartao != 3){
-                    System.out.println("Escolha uma das opções dadas!");
-                    cartao = lerOpcao();
+                    System.out.println(" |  | Escolha uma das opções dadas!");
+                    cartao = lerOpcao(" |  | ");
                 }
                 switch (cartao) {
                     case 1:
-                        saldoAlimentacao = efetuarPagamento(saldoAlimentacao);
+                        System.out.println(" |  | PAGAMENTO COM VALE-ALIMENTAÇÃO");
+                        saldoAlimentacao = efetuarPagamento(saldoAlimentacao, " |  |  | ");
                         break;
                     case 2:
-                        saldoRefeicao = efetuarPagamento(saldoRefeicao);
+                        System.out.println(" |  | PAGAMENTO COM VALE-REFEIÇÃO");
+                        saldoRefeicao = efetuarPagamento(saldoRefeicao, " |  |  | ");
                         break;
                     case 3:
-                        saldoTransporte = efetuarPagamento(saldoTransporte);
+                        System.out.println(" |  | PAGAMENTO COM VALE-TRANSPORTE");
+                        saldoTransporte = efetuarPagamento(saldoTransporte, " |  |  | ");
                         break;
                 }
+                System.out.println(" | -----------------------------------------");
+            }
+            else{
+                //Fechar o programa
+                repetir = false;
             }
 
-            //Perguntar se quer repetir
-            System.out.println("\n Deseja sair do programa?");
-            System.out.println(" 1 para sim");
-            System.out.println(" 0 para não");
-            finalizar = lerOpcao();
-            while (finalizar != 0 && finalizar != 1) {
-                System.out.println("Escolha uma das opções dadas!");
-                finalizar = lerOpcao();
-            }
-        }while (finalizar == 0) ;
+        }while (repetir) ;
 
         System.out.println("--- PROGRAMA FINALIZADO ---");
 
