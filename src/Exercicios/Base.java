@@ -15,6 +15,15 @@ public class Base {
         return new Scanner(System.in).nextLine();
     }
 
+    /** Lê um caractere dado pelo usuário */
+    public static char lerChar(){
+        String leitura = lerString();
+        if(leitura.isEmpty() || leitura.isBlank()){
+            return ' ';
+        }
+        return leitura.charAt(0);
+    }
+
     /** Lê um inteiro dado pelo usuário */
     public static int lerInt(){
         Integer leitura = null;

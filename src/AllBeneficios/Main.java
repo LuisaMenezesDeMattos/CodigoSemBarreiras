@@ -1,17 +1,3 @@
-/**
- * Fazer um programa java para controlar os gastos dos meus cartões de benefícios.
- *
- * Temos 3 categorias de benefícios: Alimentação, refeição e transporte.
- *
- * Ao iniciar o programa, devemos perguntar qual o valor inicial de cada categoria.
- *
- * Após informar os valores iniciais, o usuário poderá começar a realizar suas transações.
- *
- * Cada transação deverá decrementar o valor do saldo de cada categoria.
- *
- * O usuário poderá fazer várias transações.
- * */
-
 package AllBeneficios;
 
 import java.text.DecimalFormat;
