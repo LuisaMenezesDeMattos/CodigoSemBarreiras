@@ -90,13 +90,16 @@ public class Base {
 
     /** Lê do usuário se ele deseja repetir o programa e retorna a opção escolhida */
     public static boolean repetir(){
-        escreverLinha("\nDeseja repetir o código? Enter para sim, 0 para não");
-        String opcao = lerString();
-        if(opcao.isBlank() || opcao.isEmpty()){
-            return true;
+        escreverLinha("\nDeseja repetir o código? Digite 's' para sim, 'n' para não");
+        char opcao = lerChar();
+        if(opcao != 's' && opcao != 'n'){
+            escreverMsgAtencao("Digite uma das opções dadas");
+            opcao = lerChar();
         }
+        if(opcao == 's')
+            return true;
         escreverTitulo("Programa finalizado");
-       return false;
+        return false;
     }
 
 }
